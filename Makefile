@@ -42,11 +42,10 @@ all: clean
 		cp -a modules/* $(CURDIR)/pkg/modules/
 
 	cd pkg; \
-		mv sbin/php-fpm bin/php-fpm; \
-		rm bin/phar; \
+		rm sbin/php-fpm bin/php-cgi bin/phar; \
 		mv bin/phar.phar bin/phar; \
 		rm -rf etc php sbin var; \
-		zip -r $(CURDIR)/php-$(php-version).zip .
+		zip -rqy $(CURDIR)/php-$(php-version).zip .
 
 clean: 
 	rm -rf php* uploadprogress* curl* libjpeg* libpng* mysql* httpd* pkg
