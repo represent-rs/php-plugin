@@ -1,0 +1,8 @@
+/pkg
+/php*
+/uploadprogress*
+/curl*
+/libpng*
+/libjpeg*
+/mysql*
+.DS_Store
