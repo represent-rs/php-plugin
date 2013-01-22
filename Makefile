@@ -33,13 +33,10 @@ all: clean
 		make install; \
 		libtool --finish $(CURDIR)/php-$(php-version)/libs; \
 		cp -a libs/* $(CURDIR)/pkg/lib/
-  
-	export PATH=$(CURDIR)/build/php:$PATH
-	export LD_LIBRARY_PATH=$(CURDIR)/build/php
 
 	cd uploadprogress-$(uploadprogress-version); \
 		$(CURDIR)/pkg/bin/phpize; \
-		./configure; \
+		./configure --with-php-config=$(CURDIR)/pkg/bin/php-config; \
 		make; \
 		cp -a modules/* $(CURDIR)/pkg/modules/
 
