@@ -5,4 +5,5 @@
 /libpng*
 /libjpeg*
 /mysql*
+/httpd*
 .DS_Store
