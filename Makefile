@@ -38,12 +38,16 @@ all: clean
 	export LD_LIBRARY_PATH=$(CURDIR)/build/php
 
 	cd uploadprogress-$(uploadprogress-version); \
-		phpize; \
+		$(CURDIR)/pkg/bin/phpize; \
 		./configure; \
 		make; \
 		cp -a modules/* $(CURDIR)/pkg/modules/
 
 	cd pkg; \
+		mv sbin/php-fpm bin/php-fpm; \
+		rm bin/phar; \
+		mv bin/phar.phar bin/phar; \
+		rm -rf etc php sbin var; \
 		zip -r $(CURDIR)/php-$(php-version).zip .
 
 clean: 
