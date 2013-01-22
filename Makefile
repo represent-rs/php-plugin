@@ -38,6 +38,7 @@ all: clean
 		$(CURDIR)/pkg/bin/phpize; \
 		./configure --with-php-config=$(CURDIR)/pkg/bin/php-config; \
 		make; \
+		mkdir -p $(CURDIR)/pkg/modules; \
 		cp -a modules/* $(CURDIR)/pkg/modules/
 
 	cd pkg; \
