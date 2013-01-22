@@ -21,25 +21,24 @@ all: clean
 	unzip -q libpng-$(libpng-version).zip -d pkg
 	unzip -q mysql-c-$(mysql-c-version).zip -d pkg
 
-	cd php-5.4.10; \
-		./configure --prefix=$WORKSPACE/pkg --with-mysql --with-mysqli --enable-pdo \
+	cd php-$(php-version); \
+		./configure --prefix=$(CURDIR)/pkg --with-mysql --with-mysqli --enable-pdo \
 		--with-pdo-sqlite --with-pdo-mysql --with-gd --enable-mbstring --enable-cgi \
-		--enable-fpm --with-png-dir=$WORKSPACE/pkg --with-jpeg-dir=$WORKSPACE/pkg \
-		--with-curl=$WORKSPACE/pkg; \
+		--enable-fpm --with-png-dir=$(CURDIR)/pkg --with-jpeg-dir=$(CURDIR)/pkg \
+		--with-curl=$(CURDIR)/pkg; \
 		make; \
 		make install; \
-		libtool --finish $PWD/libs; \
+		libtool --finish $(CURDIR)/php-$(php-version)/libs; \
 		cp libs/* $(CURDIR)/pkg/lib/
   
 	export PATH=$(CURDIR)/build/php:$PATH
 	export LD_LIBRARY_PATH=$(CURDIR)/build/php
 
-	cd uploadprogress-1.0.3.1; \
+	cd uploadprogress-$(uploadprogress-version); \
 		phpize; \
 		./configure; \
 		make; \
-		cp -a modules/* $(CURDIR)/build/php/modules/
-
+		cp -a modules/* $(CURDIR)/pkg/modules/
 
 	cd pkg; \
 		zip -r $(CURDIR)/php-$(php-version).zip .
