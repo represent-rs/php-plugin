@@ -25,7 +25,7 @@ all: clean
 
 	cd php-$(version); \
 		./configure --prefix=$(CURDIR)/pkg --with-mysql --with-mysqli --enable-pdo \
-		--with-pdo-mysql --with-gd --enable-mbstring --without-pear \
+		--with-pdo-mysql --with-gd --enable-mbstring --without-pear --disable-cgi \
 		--with-png-dir=$(CURDIR)/pkg --with-jpeg-dir=$(CURDIR)/pkg \
 		--with-curl=$(CURDIR)/pkg --with-apxs2=$(CURDIR)/httpd/bin/apxs; \
 		make; \
