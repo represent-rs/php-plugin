@@ -1,14 +1,13 @@
-php-version = 5.4.10
+version = 5.4.11
 uploadprogress-version = 1.0.3.1
 curl-version = 7.28.1
 libjpeg-version = 1.2.1
-libpng-version = 1.5.13
+libpng-version = 1.5.14
 mysql-c-version = 6.0.2
 httpd-version = 2.4.3
 
-
 all: clean
-	wget -q http://ch1.php.net/get/php-5.4.10.tar.gz/from/us2.php.net/mirror -O php-$(php-version).tar.gz
+	wget -q http://ch1.php.net/get/php-$(version).tar.gz/from/us2.php.net/mirror -O php-$(version).tar.gz
 	wget -q http://pecl.php.net/get/uploadprogress-$(uploadprogress-version).tgz
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/curl-$(curl-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/libjpeg-$(libjpeg-version).zip
@@ -16,7 +15,7 @@ all: clean
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/mysql-c-$(mysql-c-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/httpd-$(httpd-version).zip
 
-	tar -xf php-$(php-version).tar.gz
+	tar -xf php-$(version).tar.gz
 	tar -xf uploadprogress-$(uploadprogress-version).tgz
 	unzip -q curl-$(curl-version).zip -d pkg
 	unzip -q libjpeg-$(libjpeg-version).zip -d pkg
@@ -24,14 +23,14 @@ all: clean
 	unzip -q mysql-c-$(mysql-c-version).zip -d pkg
 	unzip -q httpd-$(httpd-version) -d httpd
 
-	cd php-$(php-version); \
+	cd php-$(version); \
 		./configure --prefix=$(CURDIR)/pkg --with-mysql --with-mysqli --enable-pdo \
-		--with-pdo-sqlite --with-pdo-mysql --with-gd --enable-mbstring --enable-cgi \
-		--enable-fpm --with-png-dir=$(CURDIR)/pkg --with-jpeg-dir=$(CURDIR)/pkg \
+		--with-pdo-mysql --with-gd --enable-mbstring --without-pear \
+		--with-png-dir=$(CURDIR)/pkg --with-jpeg-dir=$(CURDIR)/pkg \
 		--with-curl=$(CURDIR)/pkg --with-apxs2=$(CURDIR)/httpd/bin/apxs; \
 		make; \
 		make install; \
-		libtool --finish $(CURDIR)/php-$(php-version)/libs; \
+		libtool --finish $(CURDIR)/php-$(version)/libs; \
 		cp -a libs/* $(CURDIR)/pkg/lib/
 
 	cd uploadprogress-$(uploadprogress-version); \
@@ -42,10 +41,10 @@ all: clean
 		cp -a modules/* $(CURDIR)/pkg/modules/
 
 	cd pkg; \
-		rm sbin/php-fpm bin/php-cgi bin/phar; \
+		rm bin/phar; \
 		mv bin/phar.phar bin/phar; \
-		rm -rf etc php sbin var; \
-		zip -rqy $(CURDIR)/php-$(php-version).zip .
+		rm -r php; \
+		zip -rqy $(CURDIR)/php-$(version).zip .
 
 clean: 
 	rm -rf php* uploadprogress* curl* libjpeg* libpng* mysql* httpd* pkg
