@@ -5,6 +5,7 @@ libjpeg-version = 1.2.1
 libpng-version = 1.5.14
 mysql-c-version = 6.0.2
 httpd-version = 2.4.3
+sendmail-version = 8.14.6
 
 all: clean
 	wget -q http://ch1.php.net/get/php-$(version).tar.gz/from/us2.php.net/mirror -O php-$(version).tar.gz
@@ -13,6 +14,7 @@ all: clean
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/libjpeg-$(libjpeg-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/libpng-$(libpng-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/mysql-c-$(mysql-c-version).zip
+	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/sendmail-$(sendmail-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/httpd-$(httpd-version).zip
 
 	tar -xf php-$(version).tar.gz
@@ -21,6 +23,7 @@ all: clean
 	unzip -q libjpeg-$(libjpeg-version).zip -d pkg
 	unzip -q libpng-$(libpng-version).zip -d pkg
 	unzip -q mysql-c-$(mysql-c-version).zip -d pkg
+	unzip -q sendmail-$(sendmail-version) -d pkg
 	unzip -q httpd-$(httpd-version) -d httpd
 
 	cd php-$(version); \
@@ -47,4 +50,4 @@ all: clean
 		zip -rqy $(CURDIR)/php-$(version).zip .
 
 clean: 
-	rm -rf php* uploadprogress* curl* libjpeg* libpng* mysql* httpd* pkg
+	rm -rf php* uploadprogress* curl* libjpeg* libpng* mysql* httpd* sendmail* pkg
