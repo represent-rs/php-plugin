@@ -2,7 +2,7 @@
 /php*
 /uploadprogress*
 /curl*
-/sendmail*
+/msmtp*
 /libpng*
 /libjpeg*
 /mysql*
