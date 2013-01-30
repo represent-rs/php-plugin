@@ -3,7 +3,7 @@ uploadprogress-version = 1.0.3.1
 curl-version = 7.28.1
 libjpeg-version = 1.2.1
 libpng-version = 1.5.14
-mysql-c-version = 6.0.2
+mysql-version = 5.5.29
 httpd-version = 2.4.3
 sendmail-version = 8.14.6
 
@@ -13,7 +13,7 @@ all: clean
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/curl-$(curl-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/libjpeg-$(libjpeg-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/libpng-$(libpng-version).zip
-	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/mysql-c-$(mysql-c-version).zip
+	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/mysql-$(mysql-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/sendmail-$(sendmail-version).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/httpd-$(httpd-version).zip
 
@@ -22,7 +22,7 @@ all: clean
 	unzip -q curl-$(curl-version).zip -d pkg
 	unzip -q libjpeg-$(libjpeg-version).zip -d pkg
 	unzip -q libpng-$(libpng-version).zip -d pkg
-	unzip -q mysql-c-$(mysql-c-version).zip -d pkg
+	unzip -q mysql-$(mysql-version).zip -d pkg
 	unzip -q sendmail-$(sendmail-version) -d pkg
 	unzip -q httpd-$(httpd-version) -d httpd
 
