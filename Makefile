@@ -4,7 +4,7 @@ curl-version = 7.28.1
 libjpeg-version = 1.2.1
 libpng-version = 1.5.14
 mysql-version = 5.5.29
-msmtp-verison = 1.4.30
+msmtp-version = 1.4.30
 httpd-version = 2.4.3
 
 all: clean
