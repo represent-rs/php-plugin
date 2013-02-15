@@ -34,7 +34,7 @@ all: clean
 		rm bin/phar; \
 		mv bin/phar.phar bin/phar; \
 		rm -r php; \
-		zip -rqy $(CURDIR)/php-$(php).zip.
+		zip -rqy $(CURDIR)/php-$(php).zip .
 
 clean: 
 	rm -rf php* uploadprogress* curl* libjpeg* libpng* httpd* pkg
