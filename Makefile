@@ -1,23 +1,23 @@
 all: clean
 	wget -q http://ch1.php.net/get/php-$(php).tar.gz/from/us2.php.net/mirror -O php-$(php).tar.gz
 	wget -q http://pecl.php.net/get/uploadprogress-$(uploadprogress).tgz
-	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/curl-$(curl).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/libjpeg-$(libjpeg).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/libpng-$(libpng).zip
 	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/httpd-$(httpd).zip
+	wget -q http://cloudbees-clickstack.s3.amazonaws.com/jenkins/lib/glibc.zip
 
 	tar -xf php-$(php).tar.gz
 	tar -xf uploadprogress-$(uploadprogress).tgz
-	unzip -q curl-$(curl).zip -d pkg
 	unzip -q libjpeg-$(libjpeg).zip -d pkg
 	unzip -q libpng-$(libpng).zip -d pkg
+	unzip -q glibc.zip -d pkg
 	unzip -q httpd-$(httpd).zip -d httpd
 
 	cd php-$(php); \
 		./configure --prefix=$(CURDIR)/pkg --with-mysql --with-mysqli --enable-pdo \
 		--with-pdo-mysql --with-gd --enable-mbstring --without-pear --disable-cgi \
 		--with-png-dir=$(CURDIR)/pkg --with-jpeg-dir=$(CURDIR)/pkg \
-		--with-curl=$(CURDIR)/pkg --with-apxs2=$(CURDIR)/httpd/bin/apxs; \
+		--with-apxs2=$(CURDIR)/httpd/bin/apxs; \
 		make; \
 		make install; \
 		libtool --finish $(CURDIR)/php-$(php)/libs; \
@@ -37,4 +37,4 @@ all: clean
 		zip -rqy $(CURDIR)/php-$(php).zip .
 
 clean: 
-	rm -rf php* uploadprogress* curl* libjpeg* libpng* httpd* pkg
+	rm -rf php* uploadprogress* libjpeg* libpng* httpd* glibc* pkg
